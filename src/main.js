@@ -5,6 +5,10 @@ import methodOverride from 'method-override';
 import dotenv from 'dotenv';
 import routerDev from './routes/index.js';  // Pastikan path benar
 
+
+console.log("deployed : 201");
+
+
 dotenv.config();  // Load environment variables
 
 const app = express();
