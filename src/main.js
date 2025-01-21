@@ -25,7 +25,7 @@ app.use(express.json());
 // init
 app.get('/', function (req, res) {
   console.log("route hit");
-  res.send('Hello Main Route');
+  res.send('Hello Main Route. pergi ke /api/{sensor} jika ingin mengakses konten Modern Farming');
 });
  
 // route controller
