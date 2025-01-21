@@ -1,0 +1,15 @@
+{
+  "name": "Modern Farming API",
+  "version": "0.2.0",
+  "description": "API documentation",
+  "title": "API Documentation",
+  "url": "http://localhost:3000",
+  "template": {
+    "withCompare": true,
+    "withGenerator": true
+  },
+  "order": [
+    "0.1.0",
+    "0.2.0"
+  ]
+}

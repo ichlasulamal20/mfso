@@ -1,0 +1,168 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model RFID {
+  id        Int                @id @default(autoincrement())
+  is_paired Boolean            @default(false)
+  chip_id   String
+  createdAt DateTime?
+  updatedAt DateTime?
+  dataDomba DataDombaKontinu[] @relation("DombaIDKontinu")
+}
+
+model Domba {
+  id            String             @id @default(uuid())
+  nama_domba    String?
+  usia          DateTime?
+  jenis_kelamin Gender?
+  createdAt     DateTime?          @default(now())
+  updatedAt     DateTime?          @updatedAt
+  chip_id       String
+  aht           Aht[]              @relation("DombaAht")
+  dataDomba     DataDombaPeriode[] @relation("DombaDataDomba")
+  kamera        Kamera[]           @relation("DombaKamera")
+  loadcellBadan LoadcellBadan[]    @relation("DombaLoadcellBadan")
+  loadcellPakan LoadcellPakan[]    @relation("DombaLoadcellPakan")
+  mpu           Mpu[]              @relation("DombaMpu")
+}
+
+model Sensor {
+  id            Int             @id @default(autoincrement())
+  nama_sensor   String?
+  createdAt     DateTime?
+  updatedAt     DateTime?
+  aht           Aht[]           @relation("SensorAht")
+  kamera        Kamera[]        @relation("SensorKamera")
+  loadcellBadan LoadcellBadan[] @relation("SensorLoadcellBadan")
+  loadcellPakan LoadcellPakan[] @relation("SensorLoadcellPakan")
+  mpu           Mpu[]           @relation("SensorMpu")
+}
+
+model Kamera {
+  id        Int                @id @default(autoincrement())
+  panjang   Decimal?           @db.Decimal(10, 2)
+  tinggi    Decimal?           @db.Decimal(10, 2)
+  createdAt DateTime?
+  updatedAt DateTime?
+  chip_id   String?
+  sensor_id Int?
+  paired    Boolean            @default(false)
+  dataDomba DataDombaPeriode[] @relation("KameraDataDombaPeriode")
+  chip      Domba?             @relation("DombaKamera", fields: [chip_id], references: [id])
+  sensor    Sensor?            @relation("SensorKamera", fields: [sensor_id], references: [id])
+
+  @@index([chip_id], map: "Kamera_chip_id_fkey")
+  @@index([sensor_id], map: "Kamera_sensor_id_fkey")
+}
+
+model LoadcellBadan {
+  id        Int                @id @default(autoincrement())
+  berat     Decimal?           @db.Decimal(10, 2)
+  createdAt DateTime?
+  updatedAt DateTime?
+  chip_id   String?
+  sensor_id Int?
+  paired    Boolean            @default(false)
+  dataDomba DataDombaPeriode[] @relation("LoadcellBadanDataDombaPeriode")
+  chip      Domba?             @relation("DombaLoadcellBadan", fields: [chip_id], references: [id])
+  sensor    Sensor?            @relation("SensorLoadcellBadan", fields: [sensor_id], references: [id])
+
+  @@index([chip_id], map: "LoadcellBadan_chip_id_fkey")
+  @@index([sensor_id], map: "LoadcellBadan_sensor_id_fkey")
+}
+
+model LoadcellPakan {
+  id          Int                @id @default(autoincrement())
+  berat_pakan Decimal?           @db.Decimal(10, 2)
+  createdAt   DateTime?
+  updatedAt   DateTime?
+  chip_id     String?
+  sensor_id   Int?
+  dataDomba   DataDombaKontinu[] @relation("LoadcellPakanDataDombaKontinu")
+  chip        Domba?             @relation("DombaLoadcellPakan", fields: [chip_id], references: [id])
+  sensor      Sensor?            @relation("SensorLoadcellPakan", fields: [sensor_id], references: [id])
+
+  @@index([chip_id], map: "LoadcellPakan_chip_id_fkey")
+  @@index([sensor_id], map: "LoadcellPakan_sensor_id_fkey")
+}
+
+model Aht {
+  id         Int                @id @default(autoincrement())
+  suhu       Decimal?           @db.Decimal(10, 2)
+  kelembapan Decimal?           @db.Decimal(10, 2)
+  createdAt  DateTime?
+  updatedAt  DateTime?
+  chip_id    String?
+  sensor_id  Int?
+  chip       Domba?             @relation("DombaAht", fields: [chip_id], references: [id])
+  sensor     Sensor?            @relation("SensorAht", fields: [sensor_id], references: [id])
+  dataDomba  DataDombaKontinu[] @relation("AhtDataDombaKontinu")
+
+  @@index([chip_id], map: "Aht_chip_id_fkey")
+  @@index([sensor_id], map: "Aht_sensor_id_fkey")
+}
+
+model Mpu {
+  id        Int                @id @default(autoincrement())
+  acc_x     Decimal?           @db.Decimal(10, 2)
+  acc_y     Decimal?           @db.Decimal(10, 2)
+  acc_z     Decimal?           @db.Decimal(10, 2)
+  tinggi    Decimal?           @db.Decimal(10, 2)
+  kondisi   Boolean?           @default(false)
+  createdAt DateTime?
+  updatedAt DateTime?
+  chip_id   String?
+  sensor_id Int?
+  dataDomba DataDombaKontinu[] @relation("MpuDataDombaKontinu")
+  chip      Domba?             @relation("DombaMpu", fields: [chip_id], references: [id])
+  sensor    Sensor?            @relation("SensorMpu", fields: [sensor_id], references: [id])
+
+  @@index([chip_id], map: "Mpu_chip_id_fkey")
+  @@index([sensor_id], map: "Mpu_sensor_id_fkey")
+}
+
+model DataDombaPeriode {
+  id                Int            @id @default(autoincrement())
+  chip_id           String?
+  kamera_id         Int?
+  loadcell_badan_id Int?
+  createdAt         DateTime?
+  updatedAt         DateTime?
+  chip              Domba?         @relation("DombaDataDomba", fields: [chip_id], references: [id])
+  kamera            Kamera?        @relation("KameraDataDombaPeriode", fields: [kamera_id], references: [id])
+  loadcellBadan     LoadcellBadan? @relation("LoadcellBadanDataDombaPeriode", fields: [loadcell_badan_id], references: [id])
+
+  @@index([chip_id], map: "DataDombaPeriode_chip_id_fkey")
+  @@index([kamera_id], map: "DataDombaPeriode_kamera_id_fkey")
+  @@index([loadcell_badan_id], map: "DataDombaPeriode_loadcell_badan_id_fkey")
+}
+
+model DataDombaKontinu {
+  id                Int            @id @default(autoincrement())
+  chip_id           Int?
+  mpu_id            Int?
+  loadcell_pakan_id Int?
+  aht_id            Int?
+  createdAt         DateTime?
+  updatedAt         DateTime?
+  aht               Aht?           @relation("AhtDataDombaKontinu", fields: [aht_id], references: [id])
+  chip              RFID?          @relation("DombaIDKontinu", fields: [chip_id], references: [id])
+  loadcellPakan     LoadcellPakan? @relation("LoadcellPakanDataDombaKontinu", fields: [loadcell_pakan_id], references: [id])
+  mpu               Mpu?           @relation("MpuDataDombaKontinu", fields: [mpu_id], references: [id])
+
+  @@index([aht_id], map: "DataDombaKontinu_aht_id_fkey")
+  @@index([chip_id], map: "DataDombaKontinu_chip_id_fkey")
+  @@index([loadcell_pakan_id], map: "DataDombaKontinu_loadcell_pakan_id_fkey")
+  @@index([mpu_id], map: "DataDombaKontinu_mpu_id_fkey")
+}
+
+enum Gender {
+  Male
+  Female
+}

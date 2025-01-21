@@ -1,0 +1,387 @@
+
+PS D:\data\code\stas\modern farming\monitoring-domba-inacos-groundup-prisma> pnpm exec prisma db pull
+Prisma schema loaded from prisma\schema.prisma
+Environment variables loaded from .env
+Datasource "db": MySQL database "mydb" at "localhost:3306"
+
+✖ Introspecting based on datasource defined in prisma\schema.prisma
+
+Error: P1012
+
+error: Error parsing attribute "@relation": The given constraint name `Kamera__fkey` has to be unique in the following namespace: global for foreign keys. Please provide a different name using the `map` argument.
+  -->  prisma\schema.prisma:17
+   |
+16 |
+17 | model Domba {
+18 |   chip_id       String         @id
+19 |   nama_domba    String?        // Nullable field
+20 |   usia          DateTime?      // Nullable field
+21 |   jenis_kelamin Gender?        // Nullable field, Enum type
+22 |   createdAt     DateTime?      // Nullable field
+23 |   updatedAt     DateTime?      // Nullable field
+24 |
+25 |   kamera        Kamera[]       @relation("DombaKamera", map: "Domba_Kamera_fkey")
+26 |   loadcellBadan LoadcellBadan[] @relation("DombaLoadcellBadan", map: "Domba_LoadcellBadan_fkey")
+27 |   loadcellPakan LoadcellPakan[] @relation("DombaLoadcellPakan")
+28 |   aht           Aht[]          @relation("DombaAht")
+29 |   mpu           Mpu[]          @relation("DombaMpu")
+30 |   dataDomba     DataDomba[]    @relation("DombaDataDomba")
+31 | }
+   |
+error: Error validating field `kamera` in model `Domba`: The relation field `kamera` on model `Domba` is missing an opposite relation field on the model `Kamera`. Either run `prisma format` or add it manually.
+  -->  prisma\schema.prisma:25
+   |
+24 |
+25 |   kamera        Kamera[]       @relation("DombaKamera", map: "Domba_Kamera_fkey")
+26 |   loadcellBadan LoadcellBadan[] @relation("DombaLoadcellBadan", map: "Domba_LoadcellBadan_fkey")
+   |
+error: Error parsing attribute "@relation": The given constraint name `LoadcellBadan__fkey` has to be unique in the following namespace: global for foreign keys. Please provide a different name using the `map` argument.
+  -->  prisma\schema.prisma:17
+   |
+16 |
+17 | model Domba {
+18 |   chip_id       String         @id
+19 |   nama_domba    String?        // Nullable field
+20 |   usia          DateTime?      // Nullable field
+21 |   jenis_kelamin Gender?        // Nullable field, Enum type
+22 |   createdAt     DateTime?      // Nullable field
+23 |   updatedAt     DateTime?      // Nullable field
+24 |
+25 |   kamera        Kamera[]       @relation("DombaKamera", map: "Domba_Kamera_fkey")
+26 |   loadcellBadan LoadcellBadan[] @relation("DombaLoadcellBadan", map: "Domba_LoadcellBadan_fkey")
+27 |   loadcellPakan LoadcellPakan[] @relation("DombaLoadcellPakan")
+28 |   aht           Aht[]          @relation("DombaAht")
+29 |   mpu           Mpu[]          @relation("DombaMpu")
+30 |   dataDomba     DataDomba[]    @relation("DombaDataDomba")
+31 | }
+   |
+error: Error validating field `loadcellBadan` in model `Domba`: The relation field `loadcellBadan` on model `Domba` is missing an opposite relation field on the model `LoadcellBadan`. Either run `prisma format` or add it manually.
+  -->  prisma\schema.prisma:26
+   |
+25 |   kamera        Kamera[]       @relation("DombaKamera", map: "Domba_Kamera_fkey")
+26 |   loadcellBadan LoadcellBadan[] @relation("DombaLoadcellBadan", map: "Domba_LoadcellBadan_fkey")
+27 |   loadcellPakan LoadcellPakan[] @relation("DombaLoadcellPakan")
+   |
+error: Error validating field `loadcellPakan` in model `Domba`: The relation field `loadcellPakan` on model `Domba` is missing an opposite relation field on the model `LoadcellPakan`. Either run `prisma format` or add it manually.
+  -->  prisma\schema.prisma:27
+   |
+26 |   loadcellBadan LoadcellBadan[] @relation("DombaLoadcellBadan", map: "Domba_LoadcellBadan_fkey")
+27 |   loadcellPakan LoadcellPakan[] @relation("DombaLoadcellPakan")
+28 |   aht           Aht[]          @relation("DombaAht")
+   |
+error: Error parsing attribute "@relation": The given constraint name `Aht__fkey` has to be unique in the following namespace: global for foreign keys. Please provide a different name using the `map` argument.
+  -->  prisma\schema.prisma:17
+   |
+16 |
+17 | model Domba {
+18 |   chip_id       String         @id
+19 |   nama_domba    String?        // Nullable field
+20 |   usia          DateTime?      // Nullable field
+21 |   jenis_kelamin Gender?        // Nullable field, Enum type
+22 |   createdAt     DateTime?      // Nullable field
+23 |   updatedAt     DateTime?      // Nullable field
+24 |
+25 |   kamera        Kamera[]       @relation("DombaKamera", map: "Domba_Kamera_fkey")
+26 |   loadcellBadan LoadcellBadan[] @relation("DombaLoadcellBadan", map: "Domba_LoadcellBadan_fkey")
+27 |   loadcellPakan LoadcellPakan[] @relation("DombaLoadcellPakan")
+28 |   aht           Aht[]          @relation("DombaAht")
+29 |   mpu           Mpu[]          @relation("DombaMpu")
+30 |   dataDomba     DataDomba[]    @relation("DombaDataDomba")
+31 | }
+   |
+error: Error validating field `aht` in model `Domba`: The relation field `aht` on model `Domba` is missing an opposite relation field on the model `Aht`. Either run `prisma format` or add it manually.      
+  -->  prisma\schema.prisma:28
+   |
+27 |   loadcellPakan LoadcellPakan[] @relation("DombaLoadcellPakan")
+28 |   aht           Aht[]          @relation("DombaAht")
+29 |   mpu           Mpu[]          @relation("DombaMpu")
+   |
+error: Error parsing attribute "@relation": The given constraint name `Mpu__fkey` has to be unique in the following namespace: global for foreign keys. Please provide a different name using the `map` argument.
+  -->  prisma\schema.prisma:17
+   |
+16 |
+17 | model Domba {
+18 |   chip_id       String         @id
+19 |   nama_domba    String?        // Nullable field
+20 |   usia          DateTime?      // Nullable field
+21 |   jenis_kelamin Gender?        // Nullable field, Enum type
+22 |   createdAt     DateTime?      // Nullable field
+23 |   updatedAt     DateTime?      // Nullable field
+24 |
+25 |   kamera        Kamera[]       @relation("DombaKamera", map: "Domba_Kamera_fkey")
+26 |   loadcellBadan LoadcellBadan[] @relation("DombaLoadcellBadan", map: "Domba_LoadcellBadan_fkey")
+27 |   loadcellPakan LoadcellPakan[] @relation("DombaLoadcellPakan")
+28 |   aht           Aht[]          @relation("DombaAht")
+29 |   mpu           Mpu[]          @relation("DombaMpu")
+30 |   dataDomba     DataDomba[]    @relation("DombaDataDomba")
+31 | }
+   |
+error: Error validating field `mpu` in model `Domba`: The relation field `mpu` on model `Domba` is missing an opposite relation field on the model `Mpu`. Either run `prisma format` or add it manually.      
+  -->  prisma\schema.prisma:29
+   |
+28 |   aht           Aht[]          @relation("DombaAht")
+29 |   mpu           Mpu[]          @relation("DombaMpu")
+30 |   dataDomba     DataDomba[]    @relation("DombaDataDomba")
+   |
+error: Error parsing attribute "@relation": The given constraint name `DataDomba__fkey` has to be unique in the following namespace: global for foreign keys. Please provide a different name using the `map` 
+argument.
+  -->  prisma\schema.prisma:17
+   |
+16 |
+17 | model Domba {
+18 |   chip_id       String         @id
+19 |   nama_domba    String?        // Nullable field
+20 |   usia          DateTime?      // Nullable field
+21 |   jenis_kelamin Gender?        // Nullable field, Enum type
+22 |   createdAt     DateTime?      // Nullable field
+23 |   updatedAt     DateTime?      // Nullable field
+24 |
+25 |   kamera        Kamera[]       @relation("DombaKamera", map: "Domba_Kamera_fkey")
+26 |   loadcellBadan LoadcellBadan[] @relation("DombaLoadcellBadan", map: "Domba_LoadcellBadan_fkey")
+27 |   loadcellPakan LoadcellPakan[] @relation("DombaLoadcellPakan")
+28 |   aht           Aht[]          @relation("DombaAht")
+29 |   mpu           Mpu[]          @relation("DombaMpu")
+30 |   dataDomba     DataDomba[]    @relation("DombaDataDomba")
+31 | }
+   |
+error: Error validating field `dataDomba` in model `Domba`: The relation field `dataDomba` on model `Domba` is missing an opposite relation field on the model `DataDomba`. Either run `prisma format` or add 
+it manually.
+  -->  prisma\schema.prisma:30
+   |
+29 |   mpu           Mpu[]          @relation("DombaMpu")
+30 |   dataDomba     DataDomba[]    @relation("DombaDataDomba")
+31 | }
+   |
+error: Error parsing attribute "@relation": The given constraint name `Kamera__fkey` has to be unique in the following namespace: global for foreign keys. Please provide a different name using the `map` argument.
+  -->  prisma\schema.prisma:33
+   |
+32 |
+33 | model Sensor {
+34 |   id           Int          @id @default(autoincrement())
+35 |   nama_sensor  String?      // Nullable field
+36 |   createdAt    DateTime?    // Nullable field
+37 |   updatedAt    DateTime?    // Nullable field
+38 |
+39 |   kamera       Kamera[]     @relation("SensorKamera")
+40 |   loadcellBadan LoadcellBadan[] @relation("SensorLoadcellBadan")
+41 |   aht          Aht[]        @relation("SensorAht")
+42 |   mpu          Mpu[]        @relation("SensorMpu")
+43 |   dataDomba    DataDomba[]  @relation("SensorDataDomba")
+44 | }
+   |
+error: Error validating field `kamera` in model `Sensor`: The relation field `kamera` on model `Sensor` is missing an opposite relation field on the model `Kamera`. Either run `prisma format` or add it manually.
+  -->  prisma\schema.prisma:39
+   |
+38 |
+39 |   kamera       Kamera[]     @relation("SensorKamera")
+40 |   loadcellBadan LoadcellBadan[] @relation("SensorLoadcellBadan")
+   |
+error: Error parsing attribute "@relation": The given constraint name `LoadcellBadan__fkey` has to be unique in the following namespace: global for foreign keys. Please provide a different name using the `map` argument.
+  -->  prisma\schema.prisma:33
+   |
+32 |
+33 | model Sensor {
+34 |   id           Int          @id @default(autoincrement())
+35 |   nama_sensor  String?      // Nullable field
+36 |   createdAt    DateTime?    // Nullable field
+37 |   updatedAt    DateTime?    // Nullable field
+38 |
+39 |   kamera       Kamera[]     @relation("SensorKamera")
+40 |   loadcellBadan LoadcellBadan[] @relation("SensorLoadcellBadan")
+41 |   aht          Aht[]        @relation("SensorAht")
+42 |   mpu          Mpu[]        @relation("SensorMpu")
+43 |   dataDomba    DataDomba[]  @relation("SensorDataDomba")
+44 | }
+   |
+error: Error validating field `loadcellBadan` in model `Sensor`: The relation field `loadcellBadan` on model `Sensor` is missing an opposite relation field on the model `LoadcellBadan`. Either run `prisma format` or add it manually.
+  -->  prisma\schema.prisma:40
+   |
+39 |   kamera       Kamera[]     @relation("SensorKamera")
+40 |   loadcellBadan LoadcellBadan[] @relation("SensorLoadcellBadan")
+41 |   aht          Aht[]        @relation("SensorAht")
+   |
+error: Error parsing attribute "@relation": The given constraint name `Aht__fkey` has to be unique in the following namespace: global for foreign keys. Please provide a different name using the `map` argument.
+  -->  prisma\schema.prisma:33
+   |
+32 |
+33 | model Sensor {
+34 |   id           Int          @id @default(autoincrement())
+35 |   nama_sensor  String?      // Nullable field
+36 |   createdAt    DateTime?    // Nullable field
+37 |   updatedAt    DateTime?    // Nullable field
+38 |
+39 |   kamera       Kamera[]     @relation("SensorKamera")
+40 |   loadcellBadan LoadcellBadan[] @relation("SensorLoadcellBadan")
+41 |   aht          Aht[]        @relation("SensorAht")
+42 |   mpu          Mpu[]        @relation("SensorMpu")
+43 |   dataDomba    DataDomba[]  @relation("SensorDataDomba")
+44 | }
+   |
+error: Error validating field `aht` in model `Sensor`: The relation field `aht` on model `Sensor` is missing an opposite relation field on the model `Aht`. Either run `prisma format` or add it manually.    
+  -->  prisma\schema.prisma:41
+   |
+40 |   loadcellBadan LoadcellBadan[] @relation("SensorLoadcellBadan")
+41 |   aht          Aht[]        @relation("SensorAht")
+42 |   mpu          Mpu[]        @relation("SensorMpu")
+   |
+error: Error parsing attribute "@relation": The given constraint name `Mpu__fkey` has to be unique in the following namespace: global for foreign keys. Please provide a different name using the `map` argument.
+  -->  prisma\schema.prisma:33
+   |
+32 |
+33 | model Sensor {
+34 |   id           Int          @id @default(autoincrement())
+35 |   nama_sensor  String?      // Nullable field
+36 |   createdAt    DateTime?    // Nullable field
+37 |   updatedAt    DateTime?    // Nullable field
+38 |
+39 |   kamera       Kamera[]     @relation("SensorKamera")
+40 |   loadcellBadan LoadcellBadan[] @relation("SensorLoadcellBadan")
+41 |   aht          Aht[]        @relation("SensorAht")
+42 |   mpu          Mpu[]        @relation("SensorMpu")
+43 |   dataDomba    DataDomba[]  @relation("SensorDataDomba")
+44 | }
+   |
+error: Error validating field `mpu` in model `Sensor`: The relation field `mpu` on model `Sensor` is missing an opposite relation field on the model `Mpu`. Either run `prisma format` or add it manually.    
+  -->  prisma\schema.prisma:42
+   |
+41 |   aht          Aht[]        @relation("SensorAht")
+42 |   mpu          Mpu[]        @relation("SensorMpu")
+43 |   dataDomba    DataDomba[]  @relation("SensorDataDomba")
+   |
+error: Error parsing attribute "@relation": The given constraint name `DataDomba__fkey` has to be unique in the following namespace: global for foreign keys. Please provide a different name using the `map` 
+argument.
+  -->  prisma\schema.prisma:33
+   |
+32 |
+33 | model Sensor {
+34 |   id           Int          @id @default(autoincrement())
+35 |   nama_sensor  String?      // Nullable field
+36 |   createdAt    DateTime?    // Nullable field
+37 |   updatedAt    DateTime?    // Nullable field
+38 |
+39 |   kamera       Kamera[]     @relation("SensorKamera")
+40 |   loadcellBadan LoadcellBadan[] @relation("SensorLoadcellBadan")
+41 |   aht          Aht[]        @relation("SensorAht")
+42 |   mpu          Mpu[]        @relation("SensorMpu")
+43 |   dataDomba    DataDomba[]  @relation("SensorDataDomba")
+44 | }
+   |
+error: Error validating field `dataDomba` in model `Sensor`: The relation field `dataDomba` on model `Sensor` is missing an opposite relation field on the model `DataDomba`. Either run `prisma format` or add it manually.
+  -->  prisma\schema.prisma:43
+   |
+42 |   mpu          Mpu[]        @relation("SensorMpu")
+43 |   dataDomba    DataDomba[]  @relation("SensorDataDomba")
+44 | }
+   |
+error: Error validating field `chip` in model `Kamera`: The relation field `chip` on model `Kamera` is missing an opposite relation field on the model `Domba`. Either run `prisma format` or add it manually.  -->  prisma\schema.prisma:57
+   |
+56 |
+57 |   chip          Domba?       @relation(fields: [chip_id], references: [chip_id])
+58 |   sensor        Sensor?      @relation(fields: [sensor_id], references: [id])
+   |
+error: Error validating field `sensor` in model `Kamera`: The relation field `sensor` on model `Kamera` is missing an opposite relation field on the model `Sensor`. Either run `prisma format` or add it manually.
+  -->  prisma\schema.prisma:58
+   |
+57 |   chip          Domba?       @relation(fields: [chip_id], references: [chip_id])
+58 |   sensor        Sensor?      @relation(fields: [sensor_id], references: [id])
+59 | }
+   |
+error: Error validating field `chip` in model `LoadcellBadan`: The relation field `chip` on model `LoadcellBadan` is missing an opposite relation field on the model `Domba`. Either run `prisma format` or add it manually.
+  -->  prisma\schema.prisma:69
+   |
+68 |
+69 |   chip          Domba?       @relation(fields: [chip_id], references: [chip_id])
+70 |   sensor        Sensor?      @relation(fields: [sensor_id], references: [id])
+   |
+error: Error validating field `sensor` in model `LoadcellBadan`: The relation field `sensor` on model `LoadcellBadan` is missing an opposite relation field on the model `Sensor`. Either run `prisma format` 
+or add it manually.
+  -->  prisma\schema.prisma:70
+   |
+69 |   chip          Domba?       @relation(fields: [chip_id], references: [chip_id])
+70 |   sensor        Sensor?      @relation(fields: [sensor_id], references: [id])
+71 | }
+   |
+error: Error validating field `chip` in model `Aht`: The relation field `chip` on model `Aht` is missing an opposite relation field on the model `Domba`. Either run `prisma format` or add it manually.
+  -->  prisma\schema.prisma:81
+   |
+80 |
+81 |   chip          Domba?       @relation(fields: [chip_id], references: [chip_id])
+82 |   sensor        Sensor?      @relation(fields: [sensor_id], references: [id])
+   |
+error: Error validating field `sensor` in model `Aht`: The relation field `sensor` on model `Aht` is missing an opposite relation field on the model `Sensor`. Either run `prisma format` or add it manually. 
+  -->  prisma\schema.prisma:82
+   |
+81 |   chip          Domba?       @relation(fields: [chip_id], references: [chip_id])
+82 |   sensor        Sensor?      @relation(fields: [sensor_id], references: [id])
+83 | }
+   |
+error: Error validating field `chip` in model `Mpu`: The relation field `chip` on model `Mpu` is missing an opposite relation field on the model `Domba`. Either run `prisma format` or add it manually.      
+  -->  prisma\schema.prisma:100
+   |
+99 |
+100 |   chip          Domba?       @relation(fields: [chip_id], references: [chip_id])
+101 |   sensor        Sensor?      @relation(fields: [sensor_id], references: [id])
+   |
+error: Error validating field `sensor` in model `Mpu`: The relation field `sensor` on model `Mpu` is missing an opposite relation field on the model `Sensor`. Either run `prisma format` or add it manually. 
+  -->  prisma\schema.prisma:101
+   |
+100 |   chip          Domba?       @relation(fields: [chip_id], references: [chip_id])
+101 |   sensor        Sensor?      @relation(fields: [sensor_id], references: [id])
+102 | }
+   |
+error: Error validating field `chip` in model `LoadcellPakan`: The relation field `chip` on model `LoadcellPakan` is missing an opposite relation field on the model `Domba`. Either run `prisma format` or add it manually.
+  -->  prisma\schema.prisma:112
+   |
+111 |
+112 |   chip          Domba?       @relation(fields: [chip_id], references: [chip_id])
+113 |   sensor        Sensor?      @relation(fields: [sensor_id], references: [id])
+   |
+error: Error validating field `sensor` in model `LoadcellPakan`: The relation field `sensor` on model `LoadcellPakan` is missing an opposite relation field on the model `Sensor`. Either run `prisma format` 
+or add it manually.
+  -->  prisma\schema.prisma:113
+   |
+112 |   chip          Domba?       @relation(fields: [chip_id], references: [chip_id])
+113 |   sensor        Sensor?      @relation(fields: [sensor_id], references: [id])
+114 | }
+   |
+error: Error validating field `chip` in model `DataDomba`: The relation field `chip` on model `DataDomba` is missing an opposite relation field on the model `Domba`. Either run `prisma format` or add it manually.
+  -->  prisma\schema.prisma:128
+   |
+127 |
+128 |   chip                 Domba?       @relation(fields: [chip_id], references: [chip_id])
+129 |   kamera               Kamera?      @relation(fields: [kamera_id], references: [id])
+   |
+error: Error validating field `kamera` in model `DataDomba`: The relation field `kamera` on model `DataDomba` is missing an opposite relation field on the model `Kamera`. Either run `prisma format` or add it manually.
+  -->  prisma\schema.prisma:129
+   |
+128 |   chip                 Domba?       @relation(fields: [chip_id], references: [chip_id])
+129 |   kamera               Kamera?      @relation(fields: [kamera_id], references: [id])
+130 |   mpu                  Mpu?         @relation(fields: [mpu_id], references: [id])
+   |
+error: Error validating field `mpu` in model `DataDomba`: The relation field `mpu` on model `DataDomba` is missing an opposite relation field on the model `Mpu`. Either run `prisma format` or add it manually.
+  -->  prisma\schema.prisma:130
+   |
+129 |   kamera               Kamera?      @relation(fields: [kamera_id], references: [id])
+130 |   mpu                  Mpu?         @relation(fields: [mpu_id], references: [id])
+131 |   loadcellBadan        LoadcellBadan? @relation(fields: [loadcell_badan_id], references: [id])
+   |
+error: Error validating field `loadcellBadan` in model `DataDomba`: The relation field `loadcellBadan` on model `DataDomba` is missing an opposite relation field on the model `LoadcellBadan`. Either run `prisma format` or add it manually.
+  -->  prisma\schema.prisma:131
+   |
+130 |   mpu                  Mpu?         @relation(fields: [mpu_id], references: [id])
+131 |   loadcellBadan        LoadcellBadan? @relation(fields: [loadcell_badan_id], references: [id])
+132 |   loadcellPakan        LoadcellPakan? @relation(fields: [loadcell_pakan_id], references: [id])
+   |
+error: Error validating field `loadcellPakan` in model `DataDomba`: The relation field `loadcellPakan` on model `DataDomba` is missing an opposite relation field on the model `LoadcellPakan`. Either run `prisma format` or add it manually.
+  -->  prisma\schema.prisma:132
+   |
+131 |   loadcellBadan        LoadcellBadan? @relation(fields: [loadcell_badan_id], references: [id])
+132 |   loadcellPakan        LoadcellPakan? @relation(fields: [loadcell_pakan_id], references: [id])
+133 | }
+   |
+
+
+Introspection failed as your current Prisma schema file is invalid
+
+Please fix your current schema manually (using either prisma validate or the Prisma VS Code extension to understand what's broken and confirm you fixed it), and then run this command again.
+Or run this command with the --force flag to ignore your current schema and overwrite it. All local modifications will be lost.
